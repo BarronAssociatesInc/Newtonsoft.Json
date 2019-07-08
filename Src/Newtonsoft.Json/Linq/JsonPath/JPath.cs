@@ -1,3 +1,5 @@
+#if !NO_JSONPATH
+
 #region License
 // Copyright (c) 2007 James Newton-King
 //
@@ -106,12 +108,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
                         if (_currentIndex > currentPartStartIndex)
                         {
                             string member = _expression.Substring(currentPartStartIndex, _currentIndex - currentPartStartIndex);
-                            if (member == "*")
-                            {
-                                member = null;
-                            }
-
-                            PathFilter filter = (scan) ? (PathFilter)new ScanFilter { Name = member } : new FieldFilter { Name = member };
+                            PathFilter filter = (scan) ? (PathFilter)new ScanFilter() { Name = member } : new FieldFilter() { Name = member };
                             filters.Add(filter);
                             scan = false;
                         }
@@ -127,6 +124,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
                         ended = true;
                         break;
                     case ' ':
+                        //EatWhitespace();
                         if (_currentIndex < _expression.Length)
                         {
                             ended = true;
@@ -140,8 +138,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
                             {
                                 member = null;
                             }
-
-                            PathFilter filter = (scan) ? (PathFilter)new ScanFilter { Name = member } : new FieldFilter { Name = member };
+                            PathFilter filter = (scan) ? (PathFilter)new ScanFilter() { Name = member } : new FieldFilter() { Name = member };
                             filters.Add(filter);
                             scan = false;
                         }
@@ -182,7 +179,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
                 {
                     member = null;
                 }
-                PathFilter filter = (scan) ? (PathFilter)new ScanFilter { Name = member } : new FieldFilter { Name = member };
+                PathFilter filter = (scan) ? (PathFilter)new ScanFilter() { Name = member } : new FieldFilter() { Name = member };
                 filters.Add(filter);
             }
             else
@@ -775,3 +772,5 @@ namespace Newtonsoft.Json.Linq.JsonPath
         }
     }
 }
+
+#endif
