@@ -34,9 +34,11 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 using System.Linq;
 #endif
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal static class StringUtils
     {
         public const string CarriageReturnLineFeed = "\r\n";

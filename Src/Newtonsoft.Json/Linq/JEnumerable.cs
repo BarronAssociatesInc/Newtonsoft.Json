@@ -32,6 +32,7 @@ using System.Linq;
 #endif
 using Newtonsoft.Json.Utilities;
 using System.Collections;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Linq
 {
@@ -39,7 +40,12 @@ namespace Newtonsoft.Json.Linq
     /// Represents a collection of <see cref="JToken"/> objects.
     /// </summary>
     /// <typeparam name="T">The type of token</typeparam>
-    public struct JEnumerable<T> : IJEnumerable<T>, IEquatable<JEnumerable<T>> where T : JToken
+    [Preserve]
+    public struct JEnumerable<T> : IJEnumerable<T>
+#if !AOT
+        , IEquatable<JEnumerable<T>>
+#endif
+        where T : JToken
     {
         /// <summary>
         /// An empty collection of <see cref="JToken"/> objects.

@@ -28,6 +28,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -37,11 +38,13 @@ using System.Linq;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal interface IWrappedCollection : IList
     {
         object UnderlyingCollection { get; }
     }
 
+    [Preserve]
     internal class CollectionWrapper<T> : ICollection<T>, IWrappedCollection
     {
         private readonly IList _list;

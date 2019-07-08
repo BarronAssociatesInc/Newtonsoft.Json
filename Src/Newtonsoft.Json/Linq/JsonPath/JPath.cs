@@ -27,10 +27,12 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq.JsonPath
 {
+    [Preserve]
     internal class JPath
     {
         private readonly string _expression;

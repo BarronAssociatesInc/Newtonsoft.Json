@@ -30,12 +30,15 @@ using System.Globalization;
 using System.Runtime.Serialization.Formatters;
 using Newtonsoft.Json.Serialization;
 using System.Runtime.Serialization;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Specifies the settings on a <see cref="JsonSerializer"/> object.
     /// </summary>
+    [Preserve]
     public class JsonSerializerSettings
     {
         internal const ReferenceLoopHandling DefaultReferenceLoopHandling = ReferenceLoopHandling.Error;
@@ -397,7 +400,10 @@ namespace Newtonsoft.Json
         /// </summary>
         public JsonSerializerSettings()
         {
-            Converters = new List<JsonConverter>();
+            Converters = new List<JsonConverter> {new VectorConverter()};
+#if AOT
+            Converters.Add(new HashSetConverter());
+#endif
         }
     }
 }

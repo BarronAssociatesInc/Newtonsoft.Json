@@ -25,16 +25,21 @@
 
 #if !(DOTNET || PORTABLE40 || PORTABLE)
 using System;
+#if !UNITYPROFILE
 using System.Data.SqlTypes;
+#endif
 using System.Globalization;
 using Newtonsoft.Json.Utilities;
 using System.Collections.Generic;
+using Newtonsoft.Json.Shims;
+
 
 namespace Newtonsoft.Json.Converters
 {
     /// <summary>
     /// Converts a binary value to and from a base 64 string value.
     /// </summary>
+    [Preserve]
     public class BinaryConverter : JsonConverter
     {
 #if !NET20
@@ -71,10 +76,12 @@ namespace Newtonsoft.Json.Converters
                 return (byte[])_reflectionObject.GetValue(value, BinaryToArrayName);
             }
 #endif
+#if !UNITYPROFILE
             if (value is SqlBinary)
             {
                 return ((SqlBinary)value).Value;
             }
+#endif
 
             throw new JsonSerializationException("Unexpected value type when writing binary: {0}".FormatWith(CultureInfo.InvariantCulture, value.GetType()));
         }
@@ -139,11 +146,12 @@ namespace Newtonsoft.Json.Converters
                 return _reflectionObject.Creator(data);
             }
 #endif
-
+#if !UNITYPROFILE
             if (t == typeof(SqlBinary))
             {
                 return new SqlBinary(data);
             }
+#endif
 
             throw JsonSerializationException.Create(reader, "Unexpected object type when writing binary: {0}".FormatWith(CultureInfo.InvariantCulture, objectType));
         }
@@ -188,10 +196,12 @@ namespace Newtonsoft.Json.Converters
             }
 #endif
 
+#if !UNITYPROFILE
             if (objectType == typeof(SqlBinary) || objectType == typeof(SqlBinary?))
             {
                 return true;
             }
+#endif
 
             return false;
         }

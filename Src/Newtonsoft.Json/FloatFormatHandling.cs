@@ -23,12 +23,15 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Newtonsoft.Json.Shims;
+
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Specifies float format handling options when writing special floating point numbers, e.g. <see cref="F:System.Double.NaN"/>,
     /// <see cref="F:System.Double.PositiveInfinity"/> and <see cref="F:System.Double.NegativeInfinity"/> with <see cref="JsonWriter"/>.
     /// </summary>
+    [Preserve]
     public enum FloatFormatHandling
     {
         /// <summary>

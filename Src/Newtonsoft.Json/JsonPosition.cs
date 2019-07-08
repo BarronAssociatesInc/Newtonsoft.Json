@@ -27,10 +27,12 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json
 {
+    [Preserve]
     internal enum JsonContainerType
     {
         None = 0,
@@ -39,6 +41,7 @@ namespace Newtonsoft.Json
         Constructor = 3
     }
 
+    [Preserve]
     internal struct JsonPosition
     {
         private static readonly char[] SpecialCharacters = { '.', ' ', '[', ']', '(', ')' };

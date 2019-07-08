@@ -25,6 +25,7 @@
 
 using System;
 using System.Runtime.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
@@ -37,6 +38,7 @@ namespace Newtonsoft.Json
     /// when deserializing with a value other than <c>TypeNameHandling.None</c>.
     /// </remarks>
     [Flags]
+    [Preserve]
     public enum TypeNameHandling
     {
         /// <summary>

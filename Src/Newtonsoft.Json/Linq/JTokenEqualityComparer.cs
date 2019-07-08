@@ -24,12 +24,14 @@
 #endregion
 
 using System.Collections.Generic;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Linq
 {
     /// <summary>
     /// Compares tokens to determine whether they are equal.
     /// </summary>
+    [Preserve]
     public class JTokenEqualityComparer : IEqualityComparer<JToken>
     {
         /// <summary>

@@ -29,6 +29,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Serialization
@@ -36,6 +37,7 @@ namespace Newtonsoft.Json.Serialization
     /// <summary>
     /// Contract details for a <see cref="System.Type"/> used by the <see cref="JsonSerializer"/>.
     /// </summary>
+    [Preserve]
     public class JsonObjectContract : JsonContainerContract
     {
         /// <summary>

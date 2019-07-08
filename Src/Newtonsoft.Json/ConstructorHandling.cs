@@ -23,11 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Newtonsoft.Json.Shims;
+
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Specifies how constructors are used when initializing objects during deserialization by the <see cref="JsonSerializer"/>.
     /// </summary>
+    [Preserve]
     public enum ConstructorHandling
     {
         /// <summary>

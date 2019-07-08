@@ -26,9 +26,11 @@
 using System;
 using Newtonsoft.Json.Utilities;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
+    [Preserve]
     internal class DefaultReferenceResolver : IReferenceResolver
     {
         private int _referenceCount;

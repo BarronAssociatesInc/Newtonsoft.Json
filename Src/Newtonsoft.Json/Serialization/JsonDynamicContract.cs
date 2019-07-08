@@ -31,12 +31,14 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json.Utilities;
 using System.Collections;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
     /// <summary>
     /// Contract details for a <see cref="Type"/> used by the <see cref="JsonSerializer"/>.
     /// </summary>
+    [Preserve]
     public class JsonDynamicContract : JsonContainerContract
     {
         /// <summary>

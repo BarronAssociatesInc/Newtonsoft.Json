@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq.JsonPath
 {
+    [Preserve]
     internal enum QueryOperator
     {
         None = 0,
@@ -20,6 +22,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
         Or = 9
     }
 
+    [Preserve]
     internal abstract class QueryExpression
     {
         public QueryOperator Operator { get; set; }
@@ -27,6 +30,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
         public abstract bool IsMatch(JToken t);
     }
 
+    [Preserve]
     internal class CompositeExpression : QueryExpression
     {
         public List<QueryExpression> Expressions { get; set; }
@@ -64,6 +68,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
         }
     }
 
+    [Preserve]
     internal class BooleanQueryExpression : QueryExpression
     {
         public List<PathFilter> Path { get; set; }
@@ -76,48 +81,60 @@ namespace Newtonsoft.Json.Linq.JsonPath
             foreach (JToken r in pathResult)
             {
                 JValue v = r as JValue;
-                switch (Operator)
+                if (v != null)
                 {
-                    case QueryOperator.Equals:
-                        if (v != null && EqualsWithStringCoercion(v, Value))
-                        {
+                    switch (Operator)
+                    {
+                        case QueryOperator.Equals:
+                            if (EqualsWithStringCoercion(v, Value))
+                            {
+                                return true;
+                            }
+                            break;
+                        case QueryOperator.NotEquals:
+                            if (!EqualsWithStringCoercion(v, Value))
+                            {
+                                return true;
+                            }
+                            break;
+                        case QueryOperator.GreaterThan:
+                            if (v.CompareTo(Value) > 0)
+                            {
+                                return true;
+                            }
+                            break;
+                        case QueryOperator.GreaterThanOrEquals:
+                            if (v.CompareTo(Value) >= 0)
+                            {
+                                return true;
+                            }
+                            break;
+                        case QueryOperator.LessThan:
+                            if (v.CompareTo(Value) < 0)
+                            {
+                                return true;
+                            }
+                            break;
+                        case QueryOperator.LessThanOrEquals:
+                            if (v.CompareTo(Value) <= 0)
+                            {
+                                return true;
+                            }
+                            break;
+                        case QueryOperator.Exists:
                             return true;
-                        }
-                        break;
-                    case QueryOperator.NotEquals:
-                        if (v != null && !EqualsWithStringCoercion(v, Value))
-                        {
+                    }
+                }
+                else
+                {
+                    switch (Operator)
+                    {
+                        case QueryOperator.Exists:
+                        // you can only specify primative types in a comparison
+                        // notequals will always be true
+                        case QueryOperator.NotEquals:
                             return true;
-                        }
-                        break;
-                    case QueryOperator.GreaterThan:
-                        if (v != null && v.CompareTo(Value) > 0)
-                        {
-                            return true;
-                        }
-                        break;
-                    case QueryOperator.GreaterThanOrEquals:
-                        if (v != null && v.CompareTo(Value) >= 0)
-                        {
-                            return true;
-                        }
-                        break;
-                    case QueryOperator.LessThan:
-                        if (v != null && v.CompareTo(Value) < 0)
-                        {
-                            return true;
-                        }
-                        break;
-                    case QueryOperator.LessThanOrEquals:
-                        if (v != null && v.CompareTo(Value) <= 0)
-                        {
-                            return true;
-                        }
-                        break;
-                    case QueryOperator.Exists:
-                        return true;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    }
                 }
             }
 

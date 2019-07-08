@@ -24,12 +24,14 @@
 #endregion
 
 using System;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
     /// <summary>
     /// Provides information surrounding an error.
     /// </summary>
+    [Preserve]
     public class ErrorContext
     {
         internal ErrorContext(object originalObject, object member, string path, Exception error)

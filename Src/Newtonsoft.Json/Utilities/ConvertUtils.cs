@@ -34,16 +34,18 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
+using Newtonsoft.Json.Shims;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #endif
-#if !(DOTNET || PORTABLE40 || PORTABLE)
+#if !(DOTNET || PORTABLE40 || PORTABLE || UNITYPROFILE)
 using System.Data.SqlTypes;
 
 #endif
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal enum PrimitiveTypeCode
     {
         Empty = 0,
@@ -90,12 +92,14 @@ namespace Newtonsoft.Json.Utilities
         DBNull = 41
     }
 
+    [Preserve]
     internal class TypeInformation
     {
         public Type Type { get; set; }
         public PrimitiveTypeCode TypeCode { get; set; }
     }
 
+    [Preserve]
     internal enum ParseResult
     {
         None = 0,
@@ -104,6 +108,7 @@ namespace Newtonsoft.Json.Utilities
         Invalid = 3
     }
 
+    [Preserve]
     internal static class ConvertUtils
     {
         private static readonly Dictionary<Type, PrimitiveTypeCode> TypeCodeMap =
@@ -248,7 +253,10 @@ namespace Newtonsoft.Json.Utilities
 #endif
         }
 
-        internal struct TypeConvertKey : IEquatable<TypeConvertKey>
+        internal struct TypeConvertKey
+#if !AOT
+            : IEquatable<TypeConvertKey>
+#endif
         {
             private readonly Type _initialType;
             private readonly Type _targetType;
@@ -392,7 +400,7 @@ namespace Newtonsoft.Json.Utilities
         }
 #endif
 
-        #region TryConvert
+#region TryConvert
         internal enum ConvertResult
         {
             Success = 0,
@@ -586,7 +594,7 @@ namespace Newtonsoft.Json.Utilities
                 return ConvertResult.CannotConvertNull;
             }
 #endif
-#if !(DOTNET || PORTABLE40 || PORTABLE)
+#if !(DOTNET || PORTABLE40 || PORTABLE || UNITYPROFILE)
             if (initialValue is INullable)
             {
                 value = EnsureTypeAssignable(ToValue((INullable)initialValue), initialType, targetType);
@@ -603,9 +611,9 @@ namespace Newtonsoft.Json.Utilities
             value = null;
             return ConvertResult.NoValidConversion;
         }
-        #endregion
+#endregion
 
-        #region ConvertOrCast
+#region ConvertOrCast
         /// <summary>
         /// Converts the value to the specified type. If the value is unable to be converted, the
         /// value is checked whether it assignable to the specified type.
@@ -638,7 +646,7 @@ namespace Newtonsoft.Json.Utilities
 
             return EnsureTypeAssignable(initialValue, ReflectionUtils.GetObjectType(initialValue), targetType);
         }
-        #endregion
+#endregion
 
         private static object EnsureTypeAssignable(object value, Type initialType, Type targetType)
         {
@@ -668,7 +676,7 @@ namespace Newtonsoft.Json.Utilities
             throw new ArgumentException("Could not cast or convert from {0} to {1}.".FormatWith(CultureInfo.InvariantCulture, (initialType != null) ? initialType.ToString() : "{null}", targetType));
         }
 
-#if !(DOTNET || PORTABLE40 || PORTABLE)
+#if !(DOTNET || PORTABLE40 || PORTABLE || UNITYPROFILE)
         public static object ToValue(INullable nullableValue)
         {
             if (nullableValue == null)

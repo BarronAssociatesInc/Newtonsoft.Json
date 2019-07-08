@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
     /// <summary>
     /// Represents a trace writer.
     /// </summary>
+    [Preserve]
     public interface ITraceWriter
     {
         /// <summary>

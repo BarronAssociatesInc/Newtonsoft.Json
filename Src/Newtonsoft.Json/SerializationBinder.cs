@@ -2,12 +2,14 @@
 #if (DOTNET || PORTABLE40 || PORTABLE)
 using System;
 using System.Reflection;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Allows users to control class loading and mandate what class to load.
     /// </summary>
+    [Preserve]
     public abstract class SerializationBinder
     {
         /// <summary>

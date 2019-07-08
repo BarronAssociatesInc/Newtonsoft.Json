@@ -26,12 +26,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Specifies missing member handling options for the <see cref="JsonSerializer"/>.
     /// </summary>
+    [Preserve]
     public enum MissingMemberHandling
     {
         /// <summary>

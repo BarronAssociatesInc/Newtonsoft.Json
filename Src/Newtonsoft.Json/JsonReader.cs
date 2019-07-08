@@ -31,6 +31,7 @@ using System.Globalization;
 using System.Numerics;
 #endif
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
@@ -43,6 +44,7 @@ namespace Newtonsoft.Json
     /// <summary>
     /// Represents a reader that provides fast, non-cached, forward-only access to serialized JSON data.
     /// </summary>
+    [Preserve]
     public abstract class JsonReader : IDisposable
     {
         /// <summary>
@@ -622,12 +624,24 @@ namespace Newtonsoft.Json
                 case JsonToken.Float:
                     if (!(Value is double))
                     {
-                        SetToken(JsonToken.Float, Convert.ToDouble(Value, CultureInfo.InvariantCulture), false);
+                        double d;
+#if !(NET20 || NET35 || PORTABLE40 || PORTABLE)
+                        if (Value is BigInteger)
+                        {
+                            d = (double)(BigInteger)Value;
+                        }
+                        else
+#endif
+                        {
+                            d = Convert.ToDouble(Value, CultureInfo.InvariantCulture);
+                        }
+
+                        SetToken(JsonToken.Float, d, false);
                     }
 
-                    return (double) Value;
+                    return (double)Value;
                 case JsonToken.String:
-                    return ReadDoubleString((string) Value);
+                    return ReadDoubleString((string)Value);
             }
 
             throw JsonReaderException.Create(this, "Error reading double. Unexpected token: {0}.".FormatWith(CultureInfo.InvariantCulture, t));

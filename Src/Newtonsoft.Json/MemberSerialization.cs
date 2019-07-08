@@ -26,12 +26,14 @@
 using System;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Specifies the member serialization options for the <see cref="JsonSerializer"/>.
     /// </summary>
+    [Preserve]
     public enum MemberSerialization
     {
 #pragma warning disable 1584,1711,1572,1581,1580,1574

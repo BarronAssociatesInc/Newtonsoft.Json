@@ -31,12 +31,14 @@ using System.IO;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Bson
 {
     /// <summary>
     /// Represents a reader that provides fast, non-cached, forward-only access to serialized JSON data.
     /// </summary>
+    [Preserve]
     public class BsonReader : JsonReader
     {
         private const int MaxCharBytesSize = 128;

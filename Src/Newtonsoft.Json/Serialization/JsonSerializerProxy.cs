@@ -29,9 +29,11 @@ using System.Globalization;
 using System.Runtime.Serialization.Formatters;
 using Newtonsoft.Json.Utilities;
 using System.Runtime.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
+    [Preserve]
     internal class JsonSerializerProxy : JsonSerializer
     {
         private readonly JsonSerializerInternalReader _serializerReader;

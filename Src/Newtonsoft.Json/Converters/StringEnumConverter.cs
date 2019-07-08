@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.Serialization;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
@@ -41,6 +42,7 @@ namespace Newtonsoft.Json.Converters
     /// <summary>
     /// Converts an <see cref="Enum"/> to and from its name string value.
     /// </summary>
+    [Preserve]
     public class StringEnumConverter : JsonConverter
     {
         /// <summary>

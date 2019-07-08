@@ -26,6 +26,7 @@
 using System;
 using Newtonsoft.Json.Utilities;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
@@ -33,6 +34,7 @@ namespace Newtonsoft.Json
     /// Instructs the <see cref="JsonSerializer"/> to use the specified <see cref="JsonConverter"/> when serializing the member or class.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Enum | AttributeTargets.Parameter, AllowMultiple = false)]
+    [Preserve]
     public sealed class JsonConverterAttribute : Attribute
     {
         private readonly Type _converterType;

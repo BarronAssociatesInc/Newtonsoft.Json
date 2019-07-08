@@ -26,6 +26,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
@@ -37,6 +38,7 @@ namespace Newtonsoft.Json
     ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="PreservingObjectReferencesOn" title="Preserve Object References" />       
     /// </example>
     [Flags]
+    [Preserve]
     public enum PreserveReferencesHandling
     {
         /// <summary>

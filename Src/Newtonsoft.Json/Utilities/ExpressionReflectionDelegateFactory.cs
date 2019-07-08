@@ -31,9 +31,11 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal class ExpressionReflectionDelegateFactory : ReflectionDelegateFactory
     {
         private static readonly ExpressionReflectionDelegateFactory _instance = new ExpressionReflectionDelegateFactory();

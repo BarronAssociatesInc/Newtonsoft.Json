@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Linq.JsonPath
 {
+    [Preserve]
     internal class QueryFilter : PathFilter
     {
         public QueryExpression Expression { get; set; }

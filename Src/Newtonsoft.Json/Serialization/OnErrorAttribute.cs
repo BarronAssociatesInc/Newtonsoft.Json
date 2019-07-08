@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
@@ -31,6 +32,7 @@ namespace Newtonsoft.Json.Serialization
     /// When applied to a method, specifies that the method is called when an error occurs serializing an object.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]
+    [Preserve]
     public sealed class OnErrorAttribute : Attribute
     {
     }

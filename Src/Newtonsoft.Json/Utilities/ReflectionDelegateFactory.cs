@@ -27,6 +27,7 @@ using System;
 using System.Globalization;
 using System.Reflection;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Shims;
 
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
@@ -34,6 +35,7 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal abstract class ReflectionDelegateFactory
     {
         public Func<T, object> CreateGet<T>(MemberInfo memberInfo)

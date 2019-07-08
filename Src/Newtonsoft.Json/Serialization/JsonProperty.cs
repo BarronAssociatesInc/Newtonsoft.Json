@@ -25,6 +25,7 @@
 
 using System;
 using System.Reflection;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 #if NET20
@@ -36,6 +37,7 @@ namespace Newtonsoft.Json.Serialization
     /// <summary>
     /// Maps a JSON property to a .NET member or constructor parameter.
     /// </summary>
+    [Preserve]
     public class JsonProperty
     {
         internal Required? _required;

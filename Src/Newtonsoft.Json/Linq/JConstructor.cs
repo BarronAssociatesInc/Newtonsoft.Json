@@ -28,12 +28,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json.Utilities;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Linq
 {
     /// <summary>
     /// Represents a JSON constructor.
     /// </summary>
+    [Preserve]
     public class JConstructor : JContainer
     {
         private string _name;
@@ -46,6 +48,11 @@ namespace Newtonsoft.Json.Linq
         protected override IList<JToken> ChildrenTokens
         {
             get { return _values; }
+        }
+
+        internal override int IndexOfItem(JToken item)
+        {
+            return _values.IndexOfReference(item);
         }
 
         internal override void MergeItem(object content, JsonMergeSettings settings)

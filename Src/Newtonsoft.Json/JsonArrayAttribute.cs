@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
@@ -31,6 +32,7 @@ namespace Newtonsoft.Json
     /// Instructs the <see cref="JsonSerializer"/> how to serialize the collection.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = false)]
+    [Preserve]
     public sealed class JsonArrayAttribute : JsonContainerAttribute
     {
         private bool _allowNullItems;

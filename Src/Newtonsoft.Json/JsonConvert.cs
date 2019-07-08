@@ -38,6 +38,7 @@ using System.Xml;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System.Text;
+using Newtonsoft.Json.Shims;
 #if !(NET20 || PORTABLE40)
 using System.Xml.Linq;
 
@@ -51,6 +52,7 @@ namespace Newtonsoft.Json
     /// <example>
     ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="SerializeObject" title="Serializing and Deserializing JSON with JsonConvert" />
     /// </example>
+    [Preserve]
     public static class JsonConvert
     {
         /// <summary>
@@ -96,6 +98,22 @@ namespace Newtonsoft.Json
         /// Represents JavaScript's NaN as a string. This field is read-only.
         /// </summary>
         public static readonly string NaN = "NaN";
+
+        private static readonly JsonSerializerSettings InitialSerializerSettings;
+
+        static JsonConvert()
+        {
+            InitialSerializerSettings = new JsonSerializerSettings();
+            DefaultSettings = GetDefaultSettings;
+
+        }
+
+        internal static JsonSerializerSettings GetDefaultSettings()
+        {
+            return InitialSerializerSettings;
+        }
+
+
 
         /// <summary>
         /// Converts the <see cref="DateTime"/> to its JSON string representation.

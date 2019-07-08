@@ -30,15 +30,18 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 #endif
 using System.Threading;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal class ThreadSafeStore<TKey, TValue>
     {
         private readonly object _lock = new object();
         private Dictionary<TKey, TValue> _store;
         private readonly Func<TKey, TValue> _creator;
 
+        [Preserve]
         public ThreadSafeStore(Func<TKey, TValue> creator)
         {
             if (creator == null)
@@ -50,6 +53,7 @@ namespace Newtonsoft.Json.Utilities
             _store = new Dictionary<TKey, TValue>();
         }
 
+        [Preserve]
         public TValue Get(TKey key)
         {
             TValue value;
@@ -61,6 +65,7 @@ namespace Newtonsoft.Json.Utilities
             return value;
         }
 
+        [Preserve]
         private TValue AddValue(TKey key)
         {
             TValue value = _creator(key);
@@ -84,7 +89,7 @@ namespace Newtonsoft.Json.Utilities
                     Dictionary<TKey, TValue> newStore = new Dictionary<TKey, TValue>(_store);
                     newStore[key] = value;
 
-#if !(DOTNET || PORTABLE)
+#if !(DOTNET || PORTABLE || PORTABLE40 || NET35)
                     Thread.MemoryBarrier();
 #endif
                     _store = newStore;

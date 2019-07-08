@@ -23,19 +23,21 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-#if !(DOTNET || PORTABLE40 || PORTABLE)
+#if !(DOTNET || PORTABLE40 || PORTABLE || UNITYPROFILE)
 using System.Collections.Generic;
 using System.Globalization;
 using Newtonsoft.Json.Utilities;
 using System;
 using System.Data;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Converters
 {
     /// <summary>
     /// Converts a <see cref="DataTable"/> to and from JSON.
     /// </summary>
+    [Preserve]
     public class DataTableConverter : JsonConverter
     {
         /// <summary>

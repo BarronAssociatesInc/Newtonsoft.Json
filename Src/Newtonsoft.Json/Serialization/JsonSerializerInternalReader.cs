@@ -39,6 +39,7 @@ using System.Numerics;
 using System.Reflection;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
@@ -49,6 +50,7 @@ using System.Linq;
 
 namespace Newtonsoft.Json.Serialization
 {
+    [Preserve]
     internal class JsonSerializerInternalReader : JsonSerializerInternalBase
     {
         internal enum PropertyPresence
@@ -2041,9 +2043,19 @@ namespace Newtonsoft.Json.Serialization
                             IDictionary targetDictionary = (dictionaryContract.ShouldCreateWrapper) ? dictionaryContract.CreateWrapper(createdObjectDictionary) : (IDictionary)createdObjectDictionary;
                             IDictionary newValues = (dictionaryContract.ShouldCreateWrapper) ? dictionaryContract.CreateWrapper(value) : (IDictionary)value;
 
-                            foreach (DictionaryEntry newValue in newValues)
+                            // Manual use of IDictionaryEnumerator instead of foreach to avoid DictionaryEntry box allocations.
+                            IDictionaryEnumerator e = newValues.GetEnumerator();
+                            try
                             {
-                                targetDictionary.Add(newValue.Key, newValue.Value);
+                                while (e.MoveNext())
+                                {
+                                    DictionaryEntry entry = e.Entry;
+                                    targetDictionary.Add(entry.Key, entry.Value);
+                                }
+                            }
+                            finally
+                            {
+                                (e as IDisposable)?.Dispose();
                             }
                         }
                     }

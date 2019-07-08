@@ -29,10 +29,12 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Serialization
 {
+    [Preserve]
     internal enum JsonContractType
     {
         None = 0,
@@ -51,6 +53,7 @@ namespace Newtonsoft.Json.Serialization
     /// </summary>
     /// <param name="o">The object that raised the callback event.</param>
     /// <param name="context">The streaming context.</param>
+    [Preserve]
     public delegate void SerializationCallback(object o, StreamingContext context);
 
     /// <summary>
@@ -59,6 +62,7 @@ namespace Newtonsoft.Json.Serialization
     /// <param name="o">The object that raised the callback event.</param>
     /// <param name="context">The streaming context.</param>
     /// <param name="errorContext">The error context.</param>
+    [Preserve]
     public delegate void SerializationErrorCallback(object o, StreamingContext context, ErrorContext errorContext);
 
     /// <summary>
@@ -67,17 +71,20 @@ namespace Newtonsoft.Json.Serialization
     /// <param name="o">The object to set extension data on.</param>
     /// <param name="key">The extension data key.</param>
     /// <param name="value">The extension data value.</param>
+    [Preserve]
     public delegate void ExtensionDataSetter(object o, string key, object value);
 
     /// <summary>
     /// Gets extension data for an object during serialization.
     /// </summary>
     /// <param name="o">The object to set extension data on.</param>
+    [Preserve]
     public delegate IEnumerable<KeyValuePair<object, object>> ExtensionDataGetter(object o);
 
     /// <summary>
     /// Contract details for a <see cref="System.Type"/> used by the <see cref="JsonSerializer"/>.
     /// </summary>
+    [Preserve]
     public abstract class JsonContract
     {
         internal bool IsNullable;

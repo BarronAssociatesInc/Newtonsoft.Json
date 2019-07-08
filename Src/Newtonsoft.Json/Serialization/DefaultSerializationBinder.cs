@@ -27,6 +27,7 @@ using System;
 using System.Runtime.Serialization;
 using System.Reflection;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Serialization
@@ -34,6 +35,7 @@ namespace Newtonsoft.Json.Serialization
     /// <summary>
     /// The default serialization binder used when resolving and loading classes from type names.
     /// </summary>
+    [Preserve]
     public class DefaultSerializationBinder : SerializationBinder
     {
         internal static readonly DefaultSerializationBinder Instance = new DefaultSerializationBinder();
@@ -49,7 +51,7 @@ namespace Newtonsoft.Json.Serialization
             {
                 Assembly assembly;
 
-#if !(DOTNET || PORTABLE40 || PORTABLE)
+#if !(DOTNET || PORTABLE40 || PORTABLE || AOT)
                 // look, I don't like using obsolete methods as much as you do but this is the only way
                 // Assembly.Load won't check the GAC for a partial name
 #pragma warning disable 618,612
@@ -96,7 +98,10 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
-        internal struct TypeNameKey : IEquatable<TypeNameKey>
+        internal struct TypeNameKey
+#if !AOT
+            : IEquatable<TypeNameKey>
+#endif
         {
             internal readonly string AssemblyName;
             internal readonly string TypeName;

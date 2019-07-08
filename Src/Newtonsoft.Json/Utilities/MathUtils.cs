@@ -26,9 +26,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal static class MathUtils
     {
         public static int IntLength(ulong i)

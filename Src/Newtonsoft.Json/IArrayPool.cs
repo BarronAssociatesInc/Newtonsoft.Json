@@ -1,9 +1,12 @@
-﻿namespace Newtonsoft.Json
+﻿using Newtonsoft.Json.Shims;
+
+namespace Newtonsoft.Json
 {
     /// <summary>
     /// Provides an interface for using pooled arrays.
     /// </summary>
     /// <typeparam name="T">The array type content.</typeparam>
+    [Preserve]
     public interface IArrayPool<T>
     {
         /// <summary>

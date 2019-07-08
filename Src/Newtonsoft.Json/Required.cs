@@ -23,11 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Newtonsoft.Json.Shims;
+
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Indicating whether a property is required.
     /// </summary>
+    [Preserve]
     public enum Required
     {
         /// <summary>

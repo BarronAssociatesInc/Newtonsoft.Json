@@ -1,4 +1,6 @@
 ﻿
+using Newtonsoft.Json.Shims;
+
 #if DOTNET || PORTABLE40 || PORTABLE
 
 namespace System.Runtime.Serialization.Formatters
@@ -6,6 +8,7 @@ namespace System.Runtime.Serialization.Formatters
     /// <summary>
     /// Indicates the method that will be used during deserialization for locating and loading assemblies.
     /// </summary>
+    [Preserve]
     public enum FormatterAssemblyStyle
     {
         /// <summary>

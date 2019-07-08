@@ -23,11 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Newtonsoft.Json.Shims;
+
 namespace Newtonsoft.Json.Serialization
 {
     /// <summary>
     /// Represents a method that constructs an object.
     /// </summary>
     /// <typeparam name="T">The object type to create.</typeparam>
+    [Preserve]
     public delegate object ObjectConstructor<T>(params object[] args);
 }

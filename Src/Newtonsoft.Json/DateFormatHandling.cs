@@ -23,11 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Newtonsoft.Json.Shims;
+
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Specifies how dates are formatted when writing JSON text.
     /// </summary>
+    [Preserve]
     public enum DateFormatHandling
     {
         /// <summary>

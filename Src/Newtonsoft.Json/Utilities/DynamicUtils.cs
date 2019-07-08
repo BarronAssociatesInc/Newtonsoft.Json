@@ -38,11 +38,14 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Globalization;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal static class DynamicUtils
     {
+        [Preserve]
         internal static class BinderWrapper
         {
 #if !(PORTABLE)
@@ -146,6 +149,7 @@ namespace Newtonsoft.Json.Utilities
         }
     }
 
+    [Preserve]
     internal class NoThrowGetBinderMember : GetMemberBinder
     {
         private readonly GetMemberBinder _innerBinder;
@@ -168,6 +172,7 @@ namespace Newtonsoft.Json.Utilities
         }
     }
 
+    [Preserve]
     internal class NoThrowSetBinderMember : SetMemberBinder
     {
         private readonly SetMemberBinder _innerBinder;
@@ -190,6 +195,7 @@ namespace Newtonsoft.Json.Utilities
         }
     }
 
+    [Preserve]
     internal class NoThrowExpressionVisitor : ExpressionVisitor
     {
         internal static readonly object ErrorResult = new object();

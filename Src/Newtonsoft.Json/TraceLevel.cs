@@ -1,12 +1,14 @@
 ﻿
 #if (DOTNET || PORTABLE40 || PORTABLE)
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Specifies what messages to output for the <see cref="ITraceWriter"/> class.
     /// </summary>
+    [Preserve]
     public enum TraceLevel
     {
         /// <summary>

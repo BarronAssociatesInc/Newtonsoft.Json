@@ -23,11 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Newtonsoft.Json.Shims;
+
 namespace Newtonsoft.Json.Serialization
 {
     /// <summary>
     /// Used to resolve references when serializing and deserializing JSON by the <see cref="JsonSerializer"/>.
     /// </summary>
+    [Preserve]
     public interface IReferenceResolver
     {
         /// <summary>

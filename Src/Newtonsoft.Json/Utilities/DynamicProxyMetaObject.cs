@@ -30,9 +30,11 @@ using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal sealed class DynamicProxyMetaObject<T> : DynamicMetaObject
     {
         private readonly DynamicProxy<T> _proxy;

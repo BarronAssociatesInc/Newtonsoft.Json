@@ -26,9 +26,11 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal class BidirectionalDictionary<TFirst, TSecond>
     {
         private readonly IDictionary<TFirst, TSecond> _firstToSecond;

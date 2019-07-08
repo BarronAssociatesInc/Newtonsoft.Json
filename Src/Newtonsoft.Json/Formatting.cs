@@ -23,11 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Newtonsoft.Json.Shims;
+
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Specifies formatting options for the <see cref="JsonTextWriter"/>.
     /// </summary>
+    [Preserve]
     public enum Formatting
     {
         /// <summary>

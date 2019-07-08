@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq
@@ -31,10 +32,11 @@ namespace Newtonsoft.Json.Linq
     /// <summary>
     /// Represents a reader that provides fast, non-cached, forward-only access to serialized JSON data.
     /// </summary>
+    [Preserve]
     public class JTokenReader : JsonReader, IJsonLineInfo
     {
-        private readonly string _initialPath;
         private readonly JToken _root;
+        private string _initialPath;
         private JToken _parent;
         private JToken _current;
 
@@ -57,6 +59,7 @@ namespace Newtonsoft.Json.Linq
             _root = token;
         }
 
+        // this is used by json.net schema
         internal JTokenReader(JToken token, string initialPath)
             : this(token)
         {
@@ -305,6 +308,11 @@ namespace Newtonsoft.Json.Linq
             get
             {
                 string path = base.Path;
+
+                if (_initialPath == null)
+                {
+                    _initialPath = _root.Path;
+                }
 
                 if (!string.IsNullOrEmpty(_initialPath))
                 {

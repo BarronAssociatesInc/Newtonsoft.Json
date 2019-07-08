@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
@@ -7,6 +8,7 @@ namespace Newtonsoft.Json
     /// and write values during serialization.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
+    [Preserve]
     public class JsonExtensionDataAttribute : Attribute
     {
         /// <summary>

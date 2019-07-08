@@ -25,6 +25,7 @@
 
 using System;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Converters
@@ -32,6 +33,7 @@ namespace Newtonsoft.Json.Converters
     /// <summary>
     /// Converts a <see cref="Version"/> to and from a string (e.g. "1.2.3.4").
     /// </summary>
+    [Preserve]
     public class VersionConverter : JsonConverter
     {
         /// <summary>

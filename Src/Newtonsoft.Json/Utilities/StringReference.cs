@@ -24,9 +24,11 @@
 #endregion
 
 using System;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal struct StringReference
     {
         private readonly char[] _chars;
@@ -66,6 +68,7 @@ namespace Newtonsoft.Json.Utilities
         }
     }
 
+    [Preserve]
     internal static class StringReferenceExtensions
     {
         public static int IndexOf(this StringReference s, char c, int startIndex, int length)

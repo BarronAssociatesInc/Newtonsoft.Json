@@ -27,10 +27,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Serialization
 {
+    [Preserve]
     internal abstract class JsonSerializerInternalBase
     {
         private class ReferenceEqualsEqualityComparer : IEqualityComparer<object>

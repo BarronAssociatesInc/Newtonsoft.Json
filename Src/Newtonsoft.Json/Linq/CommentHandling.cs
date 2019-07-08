@@ -1,8 +1,11 @@
-﻿namespace Newtonsoft.Json.Linq
+﻿using Newtonsoft.Json.Shims;
+
+namespace Newtonsoft.Json.Linq
 {
     /// <summary>
     /// Specifies how JSON comments are handled when loading JSON.
     /// </summary>
+    [Preserve]
     public enum CommentHandling
     {
         /// <summary>
@@ -19,6 +22,7 @@
     /// <summary>
     /// Specifies how line information is handled when loading JSON.
     /// </summary>
+    [Preserve]
     public enum LineInfoHandling
     {
         /// <summary>

@@ -23,7 +23,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-#if !(DOTNET || PORTABLE || PORTABLE40)
+#if !(DOTNET || PORTABLE || PORTABLE40 || AOT)
 using System;
 using System.Collections.Generic;
 #if NET20
@@ -33,9 +33,11 @@ using System.Reflection;
 using System.Reflection.Emit;
 using Newtonsoft.Json.Serialization;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal class DynamicReflectionDelegateFactory : ReflectionDelegateFactory
     {
         public static DynamicReflectionDelegateFactory Instance = new DynamicReflectionDelegateFactory();
@@ -240,7 +242,7 @@ namespace Newtonsoft.Json.Utilities
 
         public override Func<T, object> CreateGet<T>(PropertyInfo propertyInfo)
         {
-            DynamicMethod dynamicMethod = CreateDynamicMethod("Get" + propertyInfo.Name, typeof(T), new[] { typeof(object) }, propertyInfo.DeclaringType);
+            DynamicMethod dynamicMethod = CreateDynamicMethod("Get" + propertyInfo.Name, typeof(object), new[] { typeof(T) }, propertyInfo.DeclaringType);
             ILGenerator generator = dynamicMethod.GetILGenerator();
 
             GenerateCreateGetPropertyIL(propertyInfo, generator);

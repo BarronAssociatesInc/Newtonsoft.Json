@@ -27,6 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Threading;
+using Newtonsoft.Json.Shims;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -36,12 +37,14 @@ using System.Linq;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal interface IWrappedDictionary
         : IDictionary
     {
         object UnderlyingDictionary { get; }
     }
 
+    [Preserve]
     internal class DictionaryWrapper<TKey, TValue> : IDictionary<TKey, TValue>, IWrappedDictionary
     {
         private readonly IDictionary _dictionary;
@@ -299,9 +302,19 @@ namespace Newtonsoft.Json.Utilities
         {
             if (_dictionary != null)
             {
-                foreach (DictionaryEntry item in _dictionary)
+                // Manual use of IDictionaryEnumerator instead of foreach to avoid DictionaryEntry box allocations.
+                IDictionaryEnumerator e = _dictionary.GetEnumerator();
+                try
                 {
-                    array[arrayIndex++] = new KeyValuePair<TKey, TValue>((TKey)item.Key, (TValue)item.Value);
+                    while (e.MoveNext())
+                    {
+                        DictionaryEntry entry = e.Entry;
+                        array[arrayIndex++] = new KeyValuePair<TKey, TValue>((TKey)entry.Key, (TValue)entry.Value);
+                    }
+                }
+                finally
+                {
+                    (e as IDisposable)?.Dispose();
                 }
             }
 #if !(NET40 || NET35 || NET20 || PORTABLE40)

@@ -30,11 +30,14 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal delegate T Creator<T>();
 
+    [Preserve]
     internal static class MiscellaneousUtils
     {
         public static bool ValueEquals(object objA, object objB)

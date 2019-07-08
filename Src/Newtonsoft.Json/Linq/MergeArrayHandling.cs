@@ -1,8 +1,11 @@
+using Newtonsoft.Json.Shims;
+
 namespace Newtonsoft.Json.Linq
 {
     /// <summary>
     /// Specifies how JSON arrays are merged together.
     /// </summary>
+    [Preserve]
     public enum MergeArrayHandling
     {
         /// <summary>Concatenate arrays.</summary>

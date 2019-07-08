@@ -26,6 +26,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Newtonsoft.Json.Shims;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -34,6 +35,7 @@ using System.Linq;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal static class TypeExtensions
     {
 #if DOTNET || PORTABLE

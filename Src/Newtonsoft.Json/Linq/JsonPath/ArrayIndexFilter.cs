@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq.JsonPath
 {
+    [Preserve]
     internal class ArrayIndexFilter : PathFilter
     {
         public int? Index { get; set; }

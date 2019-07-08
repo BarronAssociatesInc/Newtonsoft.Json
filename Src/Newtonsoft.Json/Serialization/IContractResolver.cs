@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
@@ -34,6 +35,7 @@ namespace Newtonsoft.Json.Serialization
     ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeContractResolverObject" title="IContractResolver Class" />
     ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeContractResolverExample" title="IContractResolver Example" />
     /// </example>
+    [Preserve]
     public interface IContractResolver
     {
         /// <summary>

@@ -23,11 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Newtonsoft.Json.Shims;
+
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Provides an interface to enable a class to return line and position information.
     /// </summary>
+    [Preserve]
     public interface IJsonLineInfo
     {
         /// <summary>

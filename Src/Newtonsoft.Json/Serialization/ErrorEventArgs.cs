@@ -24,12 +24,14 @@
 #endregion
 
 using System;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
     /// <summary>
     /// Provides data for the Error event.
     /// </summary>
+    [Preserve]
     public class ErrorEventArgs : EventArgs
     {
         /// <summary>

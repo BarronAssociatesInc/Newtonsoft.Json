@@ -23,11 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Newtonsoft.Json.Shims;
+
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Specifies how strings are escaped when writing JSON text.
     /// </summary>
+    [Preserve]
     public enum StringEscapeHandling
     {
         /// <summary>

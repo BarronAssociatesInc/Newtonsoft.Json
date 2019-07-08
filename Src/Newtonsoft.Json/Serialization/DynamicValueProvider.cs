@@ -23,7 +23,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-#if !(PORTABLE40 || PORTABLE || DOTNET)
+#if !(PORTABLE40 || PORTABLE || DOTNET || AOT)
 using System;
 using System.Collections.Generic;
 #if NET20
@@ -33,12 +33,14 @@ using System.Text;
 using System.Reflection;
 using Newtonsoft.Json.Utilities;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
     /// <summary>
     /// Get and set values for a <see cref="MemberInfo"/> using dynamic methods.
     /// </summary>
+    [Preserve]
     public class DynamicValueProvider : IValueProvider
     {
         private readonly MemberInfo _memberInfo;

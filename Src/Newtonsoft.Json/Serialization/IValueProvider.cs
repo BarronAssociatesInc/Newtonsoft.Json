@@ -23,11 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Newtonsoft.Json.Shims;
+
 namespace Newtonsoft.Json.Serialization
 {
     /// <summary>
     /// Provides methods to get and set values.
     /// </summary>
+    [Preserve]
     public interface IValueProvider
     {
         /// <summary>

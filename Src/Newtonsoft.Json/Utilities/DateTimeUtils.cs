@@ -27,9 +27,11 @@ using System;
 using System.IO;
 using System.Xml;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal static class DateTimeUtils
     {
         internal static readonly long InitialJavaScriptDateTicks = 621355968000000000;
@@ -51,7 +53,7 @@ namespace Newtonsoft.Json.Utilities
 
         public static TimeSpan GetUtcOffset(this DateTime d)
         {
-#if NET20
+#if NET20 || NET35
             return TimeZone.CurrentTimeZone.GetUtcOffset(d);
 #else
             return TimeZoneInfo.Local.GetUtcOffset(d);

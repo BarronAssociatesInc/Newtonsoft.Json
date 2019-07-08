@@ -39,9 +39,11 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 using System.Linq;
 #endif
 using System.Runtime.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
+    [Preserve]
     internal static class JsonTypeReflector
     {
         private static bool? _dynamicCodeGeneration;
@@ -446,10 +448,12 @@ namespace Newtonsoft.Json.Serialization
             get
             {
 #if !(PORTABLE40 || PORTABLE || DOTNET)
+#if !AOT
                 if (DynamicCodeGeneration)
                 {
                     return DynamicReflectionDelegateFactory.Instance;
                 }
+#endif
 
                 return LateBoundReflectionDelegateFactory.Instance;
 #else

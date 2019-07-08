@@ -23,8 +23,11 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Newtonsoft.Json.Shims;
+
 namespace Newtonsoft.Json.Bson
 {
+    [Preserve]
     internal enum BsonType : sbyte
     {
         Number = 1,

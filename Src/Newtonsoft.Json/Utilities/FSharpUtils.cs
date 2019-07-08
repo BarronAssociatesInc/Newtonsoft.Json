@@ -31,9 +31,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal class FSharpFunction
     {
         private readonly object _instance;
@@ -53,6 +55,7 @@ namespace Newtonsoft.Json.Utilities
         }
     }
 
+    [Preserve]
     internal static class FSharpUtils
     {
         private static readonly object Lock = new object();

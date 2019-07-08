@@ -26,12 +26,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Specifies the type of JSON token.
     /// </summary>
+    [Preserve]
     public enum JsonToken
     {
         /// <summary>

@@ -34,12 +34,14 @@ using System.Text;
 using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Linq;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Bson
 {
     /// <summary>
     /// Represents a writer that provides a fast, non-cached, forward-only way of generating JSON data.
     /// </summary>
+    [Preserve]
     public class BsonWriter : JsonWriter
     {
         private readonly BsonBinaryWriter _writer;

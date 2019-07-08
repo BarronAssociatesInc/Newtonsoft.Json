@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Bson
@@ -31,6 +32,7 @@ namespace Newtonsoft.Json.Bson
     /// <summary>
     /// Represents a BSON Oid (object id).
     /// </summary>
+    [Preserve]
     public class BsonObjectId
     {
         /// <summary>

@@ -32,7 +32,9 @@ using System.Security;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-#if PORTABLE40
+#if NETSTANDARD10
+[assembly: AssemblyTitle("Json.NET .NET Standard 1.0")]
+#elif PORTABLE40
 [assembly: AssemblyTitle("Json.NET Portable .NET 4.0")]
 #elif PORTABLE
 [assembly: AssemblyTitle("Json.NET Portable")]
@@ -48,7 +50,6 @@ using System.Security;
 [assembly: AssemblyTitle("Json.NET .NET 4.0")]
 [assembly: AllowPartiallyTrustedCallers]
 #else
-
 [assembly: AssemblyTitle("Json.NET")]
 [assembly: AllowPartiallyTrustedCallers]
 #endif
@@ -93,6 +94,6 @@ using System.Security;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("7.0.0.0")]
-[assembly: AssemblyFileVersion("7.0.2.18802")]
+[assembly: AssemblyVersion("8.0.0.0")]
+[assembly: AssemblyFileVersion("8.0.0.0")]
 [assembly: CLSCompliant(true)]

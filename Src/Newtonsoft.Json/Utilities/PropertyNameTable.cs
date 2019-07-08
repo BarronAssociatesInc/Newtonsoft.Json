@@ -24,9 +24,11 @@
 #endregion
 
 using System;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal class PropertyNameTable
     {
         // used to defeat hashtable DoS attack where someone passes in lots of strings that hash to the same hash code

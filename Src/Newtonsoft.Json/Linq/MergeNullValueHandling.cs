@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Linq
 {
@@ -6,6 +7,7 @@ namespace Newtonsoft.Json.Linq
     /// Specifies how null value properties are merged.
     /// </summary>
     [Flags]
+    [Preserve]
     public enum MergeNullValueHandling
     {
         /// <summary>

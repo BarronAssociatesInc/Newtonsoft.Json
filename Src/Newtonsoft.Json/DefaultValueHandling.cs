@@ -25,6 +25,7 @@
 
 using System;
 using System.ComponentModel;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
@@ -36,6 +37,7 @@ namespace Newtonsoft.Json
     ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\SerializationTests.cs" region="ReducingSerializedJsonSizeDefaultValueHandlingExample" title="DefaultValueHandling Ignore Example" />
     /// </example>
     [Flags]
+    [Preserve]
     public enum DefaultValueHandling
     {
         /// <summary>

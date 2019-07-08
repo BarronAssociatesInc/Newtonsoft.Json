@@ -25,12 +25,14 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
     /// <summary>
     /// Provides methods to get attributes.
     /// </summary>
+    [Preserve]
     public interface IAttributeProvider
     {
         /// <summary>

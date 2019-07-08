@@ -27,12 +27,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Represents a collection of <see cref="JsonConverter"/>.
     /// </summary>
+    [Preserve]
     public class JsonConverterCollection : Collection<JsonConverter>
     {
     }

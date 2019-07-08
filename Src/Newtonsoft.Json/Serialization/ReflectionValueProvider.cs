@@ -27,12 +27,14 @@ using System;
 using System.Reflection;
 using Newtonsoft.Json.Utilities;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
     /// <summary>
     /// Get and set values for a <see cref="MemberInfo"/> using reflection.
     /// </summary>
+    [Preserve]
     public class ReflectionValueProvider : IValueProvider
     {
         private readonly MemberInfo _memberInfo;

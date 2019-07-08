@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq.JsonPath
 {
+    [Preserve]
     internal abstract class PathFilter
     {
         public abstract IEnumerable<JToken> ExecuteFilter(IEnumerable<JToken> current, bool errorWhenNoMatch);

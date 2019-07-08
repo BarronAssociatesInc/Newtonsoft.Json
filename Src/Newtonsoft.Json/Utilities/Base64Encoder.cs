@@ -25,9 +25,11 @@
 
 using System;
 using System.IO;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal class Base64Encoder
     {
         private const int Base64LineSize = 76;

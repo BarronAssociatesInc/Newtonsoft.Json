@@ -6,9 +6,11 @@ using System.IO;
 using System.Numerics;
 #endif
 using System.Text;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
+    [Preserve]
     internal class TraceJsonWriter : JsonWriter
     {
         private readonly JsonWriter _innerWriter;

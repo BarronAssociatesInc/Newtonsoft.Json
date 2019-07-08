@@ -30,6 +30,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using Newtonsoft.Json.Shims;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -39,6 +40,7 @@ using System.Linq;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal static class BufferUtils
     {
         public static char[] RentBuffer(IArrayPool<char> bufferPool, int minSize)
@@ -78,6 +80,7 @@ namespace Newtonsoft.Json.Utilities
         }
     }
 
+    [Preserve]
     internal static class JavaScriptUtils
     {
         internal static readonly bool[] SingleQuoteCharEscapeFlags = new bool[128];

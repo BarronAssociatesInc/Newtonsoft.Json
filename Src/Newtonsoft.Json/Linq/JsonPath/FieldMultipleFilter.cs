@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -9,6 +10,7 @@ using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Linq.JsonPath
 {
+    [Preserve]
     internal class FieldMultipleFilter : PathFilter
     {
         public List<string> Names { get; set; }

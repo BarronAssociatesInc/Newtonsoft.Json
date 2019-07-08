@@ -23,11 +23,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Newtonsoft.Json.Shims;
+
 namespace Newtonsoft.Json.Linq
 {
     /// <summary>
     /// Specifies the type of token.
     /// </summary>
+    [Preserve]
     public enum JTokenType
     {
         /// <summary>

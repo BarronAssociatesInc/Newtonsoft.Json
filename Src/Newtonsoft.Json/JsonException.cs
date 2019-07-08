@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json
@@ -38,6 +39,7 @@ namespace Newtonsoft.Json
 #if !(DOTNET || PORTABLE40 || PORTABLE)
     [Serializable]
 #endif
+    [Preserve]
     public class JsonException : Exception
     {
         /// <summary>

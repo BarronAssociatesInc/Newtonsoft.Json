@@ -23,13 +23,15 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-#if !(DOTNET || PORTABLE40 || PORTABLE)
+#if !(DOTNET || PORTABLE40 || PORTABLE || AOT)
 using System;
 using System.Reflection.Emit;
 using System.Reflection;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal static class ILGeneratorExtensions
     {
         public static void PushInstance(this ILGenerator generator, Type type)

@@ -24,9 +24,11 @@
 #endregion
 
 using System;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Bson
 {
+    [Preserve]
     internal enum BsonBinaryType : byte
     {
         Binary = 0x00,

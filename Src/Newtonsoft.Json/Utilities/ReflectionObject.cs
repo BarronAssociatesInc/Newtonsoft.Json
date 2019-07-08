@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -38,6 +39,7 @@ using System.Linq;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal class ReflectionMember
     {
         public Type MemberType { get; set; }
@@ -45,6 +47,7 @@ namespace Newtonsoft.Json.Utilities
         public Action<object, object> Setter { get; set; }
     }
 
+    [Preserve]
     internal class ReflectionObject
     {
         public ObjectConstructor<object> Creator { get; private set; }

@@ -24,9 +24,11 @@
 #endregion
 
 using System;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal enum ParserTimeZone
     {
         Unspecified = 0,
@@ -35,6 +37,7 @@ namespace Newtonsoft.Json.Utilities
         LocalEastOfUtc = 3
     }
 
+    [Preserve]
     internal struct DateTimeParser
     {
         static DateTimeParser()

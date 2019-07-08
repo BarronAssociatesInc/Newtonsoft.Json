@@ -30,9 +30,11 @@ using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal class DynamicProxy<T>
     {
         public virtual IEnumerable<string> GetDynamicMemberNames(T instance)

@@ -29,6 +29,7 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using Newtonsoft.Json.Utilities;
 using System.Collections;
+using Newtonsoft.Json.Shims;
 
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
@@ -39,6 +40,7 @@ namespace Newtonsoft.Json.Serialization
     /// <summary>
     /// Contract details for a <see cref="System.Type"/> used by the <see cref="JsonSerializer"/>.
     /// </summary>
+    [Preserve]
     public class JsonDictionaryContract : JsonContainerContract
     {
         /// <summary>
@@ -172,7 +174,10 @@ namespace Newtonsoft.Json.Serialization
 
             if (keyType != null && valueType != null)
             {
-                _parameterizedConstructor = CollectionUtils.ResolveEnumerableCollectionConstructor(CreatedType, typeof(KeyValuePair<,>).MakeGenericType(keyType, valueType));
+                _parameterizedConstructor = CollectionUtils.ResolveEnumerableCollectionConstructor(
+                    CreatedType,
+                    typeof(KeyValuePair<,>).MakeGenericType(keyType, valueType),
+                    typeof(IDictionary<,>).MakeGenericType(keyType, valueType));
 
 #if !(NET35 || NET20)
                 if (!HasParameterizedCreatorInternal && underlyingType.Name == FSharpUtils.FSharpMapTypeName)

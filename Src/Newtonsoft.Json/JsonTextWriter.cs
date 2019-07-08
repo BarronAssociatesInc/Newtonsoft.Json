@@ -32,6 +32,7 @@ using System.Numerics;
 using System.Text;
 using System.IO;
 using System.Xml;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json
@@ -39,6 +40,7 @@ namespace Newtonsoft.Json
     /// <summary>
     /// Represents a writer that provides a fast, non-cached, forward-only way of generating JSON data.
     /// </summary>
+    [Preserve]
     public class JsonTextWriter : JsonWriter
     {
         private readonly TextWriter _writer;

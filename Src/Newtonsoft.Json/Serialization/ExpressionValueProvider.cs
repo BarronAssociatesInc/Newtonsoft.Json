@@ -31,6 +31,7 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 #endif
 using System.Text;
 using System.Reflection;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 using System.Globalization;
 
@@ -39,6 +40,7 @@ namespace Newtonsoft.Json.Serialization
     /// <summary>
     /// Get and set values for a <see cref="MemberInfo"/> using dynamic methods.
     /// </summary>
+    [Preserve]
     public class ExpressionValueProvider : IValueProvider
     {
         private readonly MemberInfo _memberInfo;

@@ -24,12 +24,14 @@
 #endregion
 
 using System;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
     /// <summary>
     /// Builds a string. Unlike StringBuilder this class lets you reuse it's internal buffer.
     /// </summary>
+    [Preserve]
     internal struct StringBuffer
     {
         private char[] _buffer;

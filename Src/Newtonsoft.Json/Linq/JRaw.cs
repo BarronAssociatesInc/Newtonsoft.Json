@@ -25,12 +25,14 @@
 
 using System.Globalization;
 using System.IO;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Linq
 {
     /// <summary>
     /// Represents a raw JSON string.
     /// </summary>
+    [Preserve]
     public class JRaw : JValue
     {
         /// <summary>

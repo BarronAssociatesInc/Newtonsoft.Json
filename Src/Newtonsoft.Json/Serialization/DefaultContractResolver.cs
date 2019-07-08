@@ -25,7 +25,6 @@
 
 using System;
 using System.Collections;
-using Newtonsoft.Json.Schema;
 #if !(NET35 || NET20 || PORTABLE || PORTABLE40)
 using System.Collections.Concurrent;
 #endif
@@ -40,11 +39,11 @@ using System.Runtime.Serialization;
 #if !(DOTNET || PORTABLE || PORTABLE40)
 using System.Security.Permissions;
 #endif
-using System.Xml.Serialization;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Linq;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json.Shims;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -54,7 +53,11 @@ using System.Linq;
 
 namespace Newtonsoft.Json.Serialization
 {
-    internal struct ResolverContractKey : IEquatable<ResolverContractKey>
+    [Preserve]
+    internal struct ResolverContractKey
+#if !AOT
+        : IEquatable<ResolverContractKey>
+#endif
     {
         private readonly Type _resolverType;
         private readonly Type _contractType;
@@ -86,6 +89,7 @@ namespace Newtonsoft.Json.Serialization
         }
     }
 
+    [Preserve]
     internal class DefaultContractResolverState
     {
         public Dictionary<ResolverContractKey, JsonContract> ContractCache;
@@ -95,11 +99,12 @@ namespace Newtonsoft.Json.Serialization
     /// <summary>
     /// Used by <see cref="JsonSerializer"/> to resolves a <see cref="JsonContract"/> for a given <see cref="System.Type"/>.
     /// </summary>
+    [Preserve]
     public class DefaultContractResolver : IContractResolver
     {
-#pragma warning disable 612,618
+#pragma warning disable 612, 618
         private static readonly IContractResolver _instance = new DefaultContractResolver(true);
-#pragma warning restore 612,618
+#pragma warning restore 612, 618
 
         internal static IContractResolver Instance
         {
@@ -108,7 +113,7 @@ namespace Newtonsoft.Json.Serialization
 
         private static readonly JsonConverter[] BuiltInConverters =
         {
-#if !(NET20 || DOTNET || PORTABLE40 || PORTABLE)
+#if !(NET20 || DOTNET || PORTABLE40 || PORTABLE || UNITYPROFILE)
             new EntityKeyMemberConverter(),
 #endif
 #if !(NET35 || NET20 || PORTABLE40)
@@ -117,7 +122,7 @@ namespace Newtonsoft.Json.Serialization
 #if !(PORTABLE40)
             new XmlNodeConverter(),
 #endif
-#if !(DOTNET || PORTABLE40 || PORTABLE)
+#if !(DOTNET || PORTABLE40 || PORTABLE || UNITYPROFILE)
             new BinaryConverter(),
             new DataSetConverter(),
             new DataTableConverter(),
@@ -1312,7 +1317,7 @@ namespace Newtonsoft.Json.Serialization
             // warning - this method use to cause errors with Intellitrace. Retest in VS Ultimate after changes
             IValueProvider valueProvider;
 
-#if !(PORTABLE40 || PORTABLE || DOTNET)
+#if !(PORTABLE40 || PORTABLE || DOTNET || AOT)
             if (DynamicCodeGeneration)
             {
                 valueProvider = new DynamicValueProvider(member);
@@ -1321,7 +1326,7 @@ namespace Newtonsoft.Json.Serialization
             {
                 valueProvider = new ReflectionValueProvider(member);
             }
-#elif !(PORTABLE40)
+#elif !(PORTABLE40 || AOT)
             valueProvider = new ExpressionValueProvider(member);
 #else
             valueProvider = new ReflectionValueProvider(member);
@@ -1432,7 +1437,7 @@ namespace Newtonsoft.Json.Serialization
 
             bool hasJsonIgnoreAttribute =
                 JsonTypeReflector.GetAttribute<JsonIgnoreAttribute>(attributeProvider) != null
-                    // automatically ignore extension data dictionary property if it is public
+                // automatically ignore extension data dictionary property if it is public
                 || JsonTypeReflector.GetAttribute<JsonExtensionDataAttribute>(attributeProvider) != null
 #if !(DOTNET || PORTABLE40 || PORTABLE)
                 || JsonTypeReflector.GetAttribute<NonSerializedAttribute>(attributeProvider) != null

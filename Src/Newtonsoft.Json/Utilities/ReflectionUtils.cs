@@ -40,10 +40,12 @@ using Newtonsoft.Json.Utilities.LinqBridge;
 using System.Linq;
 #endif
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
 #if (DOTNET || PORTABLE || PORTABLE40)
+    [Preserve]
     internal enum MemberTypes
     {
         Property = 0,
@@ -56,6 +58,7 @@ namespace Newtonsoft.Json.Utilities
 
 #if PORTABLE
     [Flags]
+    [Preserve]
     internal enum BindingFlags
     {
         Default = 0,
@@ -81,6 +84,7 @@ namespace Newtonsoft.Json.Utilities
     }
 #endif
 
+    [Preserve]
     internal static class ReflectionUtils
     {
         public static readonly Type[] EmptyTypes;
@@ -769,9 +773,11 @@ namespace Newtonsoft.Json.Utilities
                 Attribute[] attributes = a.Cast<Attribute>().ToArray();
 
 #if (NET20 || NET35)
-    // ye olde .NET GetCustomAttributes doesn't respect the inherit argument
+                // ye olde .NET GetCustomAttributes doesn't respect the inherit argument
                 if (inherit && t.BaseType != null)
+                {
                     attributes = attributes.Union(GetAttributes(t.BaseType, attributeType, inherit)).ToArray();
+                }
 #endif
 
                 return attributes;

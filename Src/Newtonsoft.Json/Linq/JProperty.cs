@@ -29,12 +29,14 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Utilities;
 using System.Diagnostics;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Linq
 {
     /// <summary>
     /// Represents a JSON property.
     /// </summary>
+    [Preserve]
     public class JProperty : JContainer
     {
         #region JPropertyList
@@ -233,6 +235,11 @@ namespace Newtonsoft.Json.Linq
         internal override void RemoveItemAt(int index)
         {
             throw new JsonException("Cannot add or remove items from {0}.".FormatWith(CultureInfo.InvariantCulture, typeof(JProperty)));
+        }
+
+        internal override int IndexOfItem(JToken item)
+        {
+            return _content.IndexOf(item);
         }
 
         internal override void InsertItem(int index, JToken item, bool skipParentCheck)

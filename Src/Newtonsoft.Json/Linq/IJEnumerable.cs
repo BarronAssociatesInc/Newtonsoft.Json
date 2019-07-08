@@ -24,6 +24,7 @@
 #endregion
 
 using System.Collections.Generic;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Linq
 {
@@ -31,6 +32,7 @@ namespace Newtonsoft.Json.Linq
     /// Represents a collection of <see cref="JToken"/> objects.
     /// </summary>
     /// <typeparam name="T">The type of token</typeparam>
+    [Preserve]
     public interface IJEnumerable<
 #if !(NET20 || NET35)
         out

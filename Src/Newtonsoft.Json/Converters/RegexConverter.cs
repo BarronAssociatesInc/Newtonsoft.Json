@@ -28,12 +28,14 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json.Bson;
 using System.Globalization;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Converters
 {
     /// <summary>
     /// Converts a <see cref="Regex"/> to and from JSON and BSON.
     /// </summary>
+    [Preserve]
     public class RegexConverter : JsonConverter
     {
         private const string PatternName = "Pattern";

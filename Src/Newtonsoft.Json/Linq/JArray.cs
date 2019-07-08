@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Utilities;
 using System.IO;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Linq
 {
@@ -38,6 +39,7 @@ namespace Newtonsoft.Json.Linq
     /// <example>
     ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParseArray" title="Parsing a JSON Array from Text" />
     /// </example>
+    [Preserve]
     public class JArray : JContainer, IList<JToken>
     {
         private readonly List<JToken> _values = new List<JToken>();
@@ -268,6 +270,11 @@ namespace Newtonsoft.Json.Linq
         {
             get { return GetItem(index); }
             set { SetItem(index, value); }
+        }
+
+        internal override int IndexOfItem(JToken item)
+        {
+            return _values.IndexOfReference(item);
         }
 
         internal override void MergeItem(object content, JsonMergeSettings settings)

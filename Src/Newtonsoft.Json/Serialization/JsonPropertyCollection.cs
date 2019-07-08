@@ -29,12 +29,14 @@ using System.Text;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json.Utilities;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
     /// <summary>
     /// A collection of <see cref="JsonProperty"/> objects.
     /// </summary>
+    [Preserve]
     public class JsonPropertyCollection : KeyedCollection<string, JsonProperty>
     {
         private readonly Type _type;

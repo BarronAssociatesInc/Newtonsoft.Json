@@ -31,6 +31,7 @@ using System.Globalization;
 using System.Reflection;
 using Newtonsoft.Json.Utilities;
 using System.Collections;
+using Newtonsoft.Json.Shims;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -43,6 +44,7 @@ namespace Newtonsoft.Json.Serialization
     /// <summary>
     /// Contract details for a <see cref="System.Type"/> used by the <see cref="JsonSerializer"/>.
     /// </summary>
+    [Preserve]
     public class JsonArrayContract : JsonContainerContract
     {
         /// <summary>

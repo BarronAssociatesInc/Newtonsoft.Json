@@ -27,6 +27,8 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Utilities;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
+
 #if !(NET35 || NET20 || PORTABLE40)
 using System.Dynamic;
 using System.Linq.Expressions;
@@ -41,7 +43,12 @@ namespace Newtonsoft.Json.Linq
     /// <summary>
     /// Represents a value in JSON (string, integer, date, etc).
     /// </summary>
-    public class JValue : JToken, IEquatable<JValue>, IFormattable, IComparable, IComparable<JValue>
+    [Preserve]
+    public class JValue : JToken, IFormattable, IComparable
+#if !AOT
+        , IEquatable<JValue>
+        , IComparable<JValue>
+#endif
 #if !PORTABLE
         , IConvertible
 #endif
@@ -819,11 +826,13 @@ namespace Newtonsoft.Json.Linq
                     writer.WriteValue((byte[])_value);
                     return;
                 case JTokenType.Guid:
+                    writer.WriteValue((_value != null) ? (Guid?)_value : null);
+                    return;
                 case JTokenType.TimeSpan:
-                    writer.WriteValue((_value != null) ? _value.ToString() : null);
+                    writer.WriteValue((_value != null) ? (TimeSpan?)_value : null);
                     return;
                 case JTokenType.Uri:
-                    writer.WriteValue((_value != null) ? ((Uri)_value).OriginalString : null);
+                    writer.WriteValue((Uri)_value);
                     return;
             }
 

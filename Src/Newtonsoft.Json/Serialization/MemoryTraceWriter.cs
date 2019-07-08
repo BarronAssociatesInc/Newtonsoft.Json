@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Serialization
 {
@@ -10,6 +11,7 @@ namespace Newtonsoft.Json.Serialization
     /// Represents a trace writer that writes to memory. When the trace message limit is
     /// reached then old trace messages will be removed as new messages are added.
     /// </summary>
+    [Preserve]
     public class MemoryTraceWriter : ITraceWriter
     {
         private readonly Queue<string> _traceMessages;

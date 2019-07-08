@@ -37,6 +37,7 @@ using System.Linq.Expressions;
 using System.IO;
 using Newtonsoft.Json.Utilities;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -52,6 +53,7 @@ namespace Newtonsoft.Json.Linq
     /// <example>
     ///   <code lang="cs" source="..\Src\Newtonsoft.Json.Tests\Documentation\LinqToJsonTests.cs" region="LinqToJsonCreateParse" title="Parsing a JSON Object from Text" />
     /// </example>
+    [Preserve]
     public class JObject : JContainer, IDictionary<string, JToken>, INotifyPropertyChanged
 #if !(DOTNET || PORTABLE40 || PORTABLE)
         , ICustomTypeDescriptor
@@ -126,6 +128,11 @@ namespace Newtonsoft.Json.Linq
             }
 
             return _properties.Compare(t._properties);
+        }
+
+        internal override int IndexOfItem(JToken item)
+        {
+            return _properties.IndexOfReference(item);
         }
 
         internal override void InsertItem(int index, JToken item, bool skipParentCheck)

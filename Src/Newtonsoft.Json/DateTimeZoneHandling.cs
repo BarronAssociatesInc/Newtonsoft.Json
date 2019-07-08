@@ -24,12 +24,14 @@
 #endregion
 
 using System;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Specifies how to treat the time value when converting between string and <see cref="DateTime"/>.
     /// </summary>
+    [Preserve]
     public enum DateTimeZoneHandling
     {
         /// <summary>

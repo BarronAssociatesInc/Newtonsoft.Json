@@ -27,6 +27,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Utilities;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -39,6 +40,7 @@ namespace Newtonsoft.Json.Linq
     /// <summary>
     /// Contains the LINQ to JSON extension methods.
     /// </summary>
+    [Preserve]
     public static class Extensions
     {
         /// <summary>

@@ -31,6 +31,7 @@ using System.Numerics;
 #endif
 using Newtonsoft.Json.Utilities;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -43,6 +44,7 @@ namespace Newtonsoft.Json
     /// <summary>
     /// Represents a writer that provides a fast, non-cached, forward-only way of generating JSON data.
     /// </summary>
+    [Preserve]
     public abstract class JsonWriter : IDisposable
     {
         internal enum State
@@ -626,7 +628,7 @@ namespace Newtonsoft.Json
             WriteToken(token, null);
         }
 
-        internal void WriteToken(JsonReader reader, bool writeChildren, bool writeDateConstructorAsDate, bool writeComments)
+        internal virtual void WriteToken(JsonReader reader, bool writeChildren, bool writeDateConstructorAsDate, bool writeComments)
         {
             int initialDepth;
 
@@ -643,11 +645,6 @@ namespace Newtonsoft.Json
                 initialDepth = reader.Depth;
             }
 
-            WriteToken(reader, initialDepth, writeChildren, writeDateConstructorAsDate, writeComments);
-        }
-
-        internal void WriteToken(JsonReader reader, int initialDepth, bool writeChildren, bool writeDateConstructorAsDate, bool writeComments)
-        {
             do
             {
                 // write a JValue date when the constructor is for a date
@@ -657,7 +654,7 @@ namespace Newtonsoft.Json
                 }
                 else
                 {
-                    if (reader.TokenType != JsonToken.Comment || writeComments)
+                    if (writeComments || reader.TokenType != JsonToken.Comment)
                     {
                         WriteToken(reader.TokenType, reader.Value);
                     }

@@ -27,6 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json
 {
@@ -36,6 +37,7 @@ namespace Newtonsoft.Json
 #if !(DOTNET || PORTABLE40 || PORTABLE)
     [Serializable]
 #endif
+    [Preserve]
     public class JsonSerializationException : JsonException
     {
         /// <summary>

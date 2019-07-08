@@ -25,9 +25,11 @@
 
 using System;
 using System.Text;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal static class JsonTokenUtils
     {
         internal static bool IsEndToken(JsonToken token)

@@ -31,11 +31,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Shims;
 
 namespace Newtonsoft.Json.Utilities
 {
+    [Preserve]
     internal static class ImmutableCollectionsUtils
     {
+        [Preserve]
         internal class ImmutableCollectionTypeInfo
         {
             public ImmutableCollectionTypeInfo(string contractTypeName, string createdTypeName, string builderTypeName)

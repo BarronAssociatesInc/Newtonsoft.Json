@@ -26,6 +26,7 @@
 using System;
 using Newtonsoft.Json.Bson;
 using System.Globalization;
+using Newtonsoft.Json.Shims;
 using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Converters
@@ -33,6 +34,7 @@ namespace Newtonsoft.Json.Converters
     /// <summary>
     /// Converts a <see cref="BsonObjectId"/> to and from JSON and BSON.
     /// </summary>
+    [Preserve]
     public class BsonObjectIdConverter : JsonConverter
     {
         /// <summary>
